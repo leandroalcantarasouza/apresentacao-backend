@@ -1,10 +1,7 @@
-FROM fabric8/java-jboss-openjdk8-jdk:1.5.1
-
-ENV JAVA_APP_JAR ola.jar
-ENV AB_ENABLED off
-ENV AB_JOLOKIA_AUTH_OPENSHIFT true
-ENV JAVA_OPTIONS -Xmx256m -Djava.security.egd=file:///dev/./urandom
-
+FROM openjdk:8
+MAINTAINER Leandro Souza <leandro.alcantara.souza@gmail.com>
+VOLUME /tmp
+WORKDIR /usr/src/app
+COPY ./target/ola.jar app.jar
 EXPOSE 8080
-
-ADD target/ola.jar /deployments/
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]

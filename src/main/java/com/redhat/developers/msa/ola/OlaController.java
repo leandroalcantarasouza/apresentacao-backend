@@ -29,7 +29,7 @@ public class OlaController {
     @ApiOperation("Returns the greeting in Portuguese")
     public String ola() {
         String hostname = System.getenv().getOrDefault("HOSTNAME", "Unknown");
-        return String.format("Olá de %s", hostname);
+        return String.format("Olá again de %s", hostname);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/health")
