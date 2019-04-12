@@ -1,3 +1,8 @@
+#FROM ma:8 asdocker builder
+#COPY . ei/src
+#WORKDIR /src
+#RUN ./build.sh all
+
 FROM openjdk:8
 MAINTAINER Leandro Souza <leandro.alcantara.souza@gmail.com>
 VOLUME /tmp

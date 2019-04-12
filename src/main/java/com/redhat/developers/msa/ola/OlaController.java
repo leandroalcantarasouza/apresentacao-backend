@@ -17,6 +17,7 @@
 package com.redhat.developers.msa.ola;
 
 import io.swagger.annotations.ApiOperation;
+import org.joda.time.LocalDateTime;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class OlaController {
     @ApiOperation("Returns the greeting in Portuguese")
     public String ola() {
         String hostname = System.getenv().getOrDefault("HOSTNAME", "Unknown");
-        return String.format("Olá again de %s", hostname);
+        return String.format("Olá again de novo %s, %s", LocalDateTime.now(), hostname);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/health")
