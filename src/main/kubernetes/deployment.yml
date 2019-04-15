@@ -17,7 +17,10 @@ spec:
     spec:
       containers:
         - image: apresentacao-backend:java
-          name: apresentacao-frontend
+          name: apresentacao-backend
           imagePullPolicy: Never #colocado never pois como está usando minikube as imagens estão no docker local
+          env:
+            - name: JAVA_OPTIONS
+              value: " -Duser.timezone=America/Sao_Paulo -Duser.language=pt -Duser.region=BR" #name do service do backend
           ports:
             - containerPort: 8080
