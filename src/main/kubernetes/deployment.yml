@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apresentacao-backend
+  name: deployment-apresentacao-backend
+  namespace: apresentacao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apresentacao-backend
+  template:
+    metadata:
+      labels:
+        app: apresentacao-backend
+    spec:
+      containers:
+        - image: apresentacao-backend:java
+          name: apresentacao-frontend
+          imagePullPolicy: Never #colocado never pois como está usando minikube as imagens estão no docker local
+          ports:
+            - containerPort: 8080
