@@ -10,5 +10,5 @@ MAINTAINER Leandro Souza <leandro.alcantara.souza@gmail.com>
 VOLUME /tmp
 WORKDIR /usr/src/app
 COPY --from=maven /usr/src/app/target/ola.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
+ENV JAVA_OPTIONS=""
+ENTRYPOINT java $JAVA_OPTIONS -Djava.security.egd=file:/dev/./urandom -jar app.jar
