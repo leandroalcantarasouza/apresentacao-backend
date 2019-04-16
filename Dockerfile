@@ -11,4 +11,5 @@ VOLUME /tmp
 WORKDIR /usr/src/app
 COPY --from=maven /usr/src/app/target/ola.jar app.jar
 ENV JAVA_OPTIONS=""
+ENV LOGGING_CONFIG=""
 ENTRYPOINT java $JAVA_OPTIONS -Djava.security.egd=file:/dev/./urandom -jar app.jar

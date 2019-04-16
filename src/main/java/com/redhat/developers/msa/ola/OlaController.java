@@ -18,6 +18,8 @@ package com.redhat.developers.msa.ola;
 
 import io.swagger.annotations.ApiOperation;
 import org.joda.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,10 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class OlaController {
 
+    private static final Logger logger = LoggerFactory.getLogger(OlaController.class);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/ola", produces = "text/plain")
     @ApiOperation("Returns the greeting in Portuguese")
     public String ola() {
         String hostname = System.getenv().getOrDefault("HOSTNAME", "Unknown");
+        logger.info("Nome do hostname = "+ hostname);
         return String.format("Olá hello %s, %s", LocalDateTime.now(), hostname);
     }
 
