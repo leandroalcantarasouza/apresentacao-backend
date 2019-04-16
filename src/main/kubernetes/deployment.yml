@@ -22,5 +22,16 @@ spec:
           env:
             - name: JAVA_OPTIONS
               value: " -Duser.timezone=America/Sao_Paulo -Duser.language=pt -Duser.region=BR" #name do service do backend
+            -  name: LOGGING_CONFIG
+               value: file:/etc/configuration/logback.xml
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: logback-xml
+              mountPath: /etc/configuration
+              readOnly: true
+      volumes:
+        - name: logback-xml
+          configMap:
+            name: apresentacao-backend-logback-config-map
+
