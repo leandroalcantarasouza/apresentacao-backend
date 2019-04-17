@@ -1,25 +1,9 @@
-# ola
-ola microservice using Spring Boot
+run on docker
 
-The detailed instructions to run *Red Hat Helloworld MSA* demo, can be found at the following repository: <https://github.com/redhat-helloworld-msa/helloworld-msa>
-
-
-Build and Deploy ola locally
-----------------------------
-
-1. Open a command prompt and navigate to the root directory of this microservice.
-2. Type this command to build and execute the microservice:
-
-        mvn clean compile spring-boot:run
-
-3. The application will be running at the following URL: <http://localhost:8080/api/ola>
+docker run -p 8080:8080 --name apresentacao-backend -d --network minharede -e "LOGGING_CONFIG=file:/etc/configuration/logback.xml" -v ./main/kubernetes/logback-logstash.xml:/etc/configuration/logback.xml apresentacao-backend:java #sobe a imagem apresentacao-backend
 
 
-Deploy the application in OpenShift
------------------------------------
+minikube
+~/projetos/apresentacao-backend/src/main$ minikube mount ./main/kubernetes:/var/lib/logback
 
-1. Make sure to be connected to the OpenShift
-2. Execute
-
-		mvn package fabric8:deploy
-
+docker run -p 8080:8080 --name apresentacao-backend -d --network minharede -e "LOGGING_CONFIG=file:/etc/configuration/logback.xml" -v /var/lib/logback/logback-logstash.xml:/etc/configuration/logback.xml apresentacao-backend:java #sobe a imagem apresentacao-backend
