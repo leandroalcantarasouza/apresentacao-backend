@@ -6,6 +6,5 @@ node {
         def xml = new XmlSlurper().parseText(new File("${rootDir}/pom.xml"))
         def valor = xml.project.version
         echo "valor do pom = ${valor}"
-        }
     }
 }
