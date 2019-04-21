@@ -7,6 +7,7 @@ node {
         //recuperar arquivo .xml e verificar a tag version
         //sh "kubectl apply -f --namespace=apresentacao ${rootDir}/src/main/kubernetes/kubernetes.yml"
         //sh "kubectl apply -f /src/main/kubernetes/kubernetes.yml --namespace=apresentacao"
-        sh "cat /src/main/kubernetes/kubernetes.yml"
+        def kubernetes_yml = readFile("${rootDir}/src/main/kubernetes/kubernetes.yml")
+        echo kubernetes_yml
     }
 }
