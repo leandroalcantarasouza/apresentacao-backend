@@ -5,7 +5,6 @@ node {
         def rootDir = pwd()
         def xml = readFile("${rootDir}/pom.xml")
         //recuperar arquivo .xml e verificar a tag version
-        sh 'minikube version'
         sh 'kubectl apply -f ./src/main/kubernetes/kubernetes.yml --namespace=apresentacao'
     }
 }
