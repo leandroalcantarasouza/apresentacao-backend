@@ -4,7 +4,7 @@ node {
         sh "docker build -t apresentacao-backend:java ."
         def rootDir = pwd()
         def xml = readFile("${rootDir}/pom.xml")
-        def valor = xml.project.version
-        echo "valor do pom = ${valor}"
+        sh "echo ${xml}
+        //echo "valor do pom = ${valor}"
     }
 }
