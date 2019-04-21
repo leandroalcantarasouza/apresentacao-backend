@@ -20,4 +20,6 @@ RUN usermod -aG docker jenkins
 # install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
 
+ENV JAVA_OPTS="-Duser.timezone=America/Sao_Paulo -Duser.language=pt -Duser.region=BR"
+
 ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
