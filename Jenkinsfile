@@ -8,6 +8,6 @@ node {
         //sh "kubectl apply -f --namespace=apresentacao ${rootDir}/src/main/kubernetes/kubernetes.yml"
         //sh "kubectl apply -f /src/main/kubernetes/kubernetes.yml --namespace=apresentacao"
         def kubernetes_yml = readFile("${rootDir}/src/main/kubernetes/kubernetes.yml")
-        echo kubernetes_yml
+        sh "kubectl apply -f ${kubernetes_yml} --namespace=apresentacao"
     }
 }
