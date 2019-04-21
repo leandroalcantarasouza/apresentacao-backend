@@ -9,6 +9,6 @@ node {
         //sh "kubectl apply -f /src/main/kubernetes/kubernetes.yml --namespace=apresentacao"
         def kubernetes_yml = readFile("${rootDir}/src/main/kubernetes/kubernetes.yml")
         //sh "cat ${kubernetes_yml} | kubectl apply -f - --namespace=apresentacao"
-        sh "cat ${kubernetes_yml}"
+        echo ${kubernetes_yml}
     }
 }
