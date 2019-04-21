@@ -1,17 +1,11 @@
-node {
-
-    checkout scm
-
-    // Configuramos os estágios
-
-    stage "Build"
-
-        def customImage = docker.build("apresentacao-backend:java")
-
-    stage "Push"
-
-        customImage.inside {
-            sh 'mvn --version'
-            sh 'java --version'
+pipeline {
+    agent none
+    stages {
+        stage('Build Image') {
+            steps {
+                sh ' docker run -p 8081:8080 -d --name teste apresentacao-backend:java'
+            }
         }
+    }
+
 }
