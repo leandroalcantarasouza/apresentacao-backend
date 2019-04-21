@@ -43,7 +43,6 @@ metadata:
   labels:
     app: apresentacao-backend
   name: deployment-apresentacao-backend
-  namespace: apresentacao
 spec:
   replicas: 1
   selector:
