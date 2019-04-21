@@ -1,0 +1,88 @@
+apiVersion: v1
+data:
+  logback.xml: |
+    <configuration>
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </configuration>
+kind: ConfigMap
+metadata:
+  name: apresentacao-backend-logback-config-map
+  labels:
+    app: apresentacao-backend
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: apresentacao-backend
+  name: service-apresentacao-backend
+spec:
+  selector:
+    app: apresentacao-backend
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apresentacao-backend
+  name: deployment-apresentacao-backend
+  namespace: apresentacao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apresentacao-backend
+  template:
+    metadata:
+      labels:
+        app: apresentacao-backend
+    spec:
+      containers:
+        - image: apresentacao-backend:java
+          name: apresentacao-backend
+          imagePullPolicy: Never #colocado never pois como está usando minikube as imagens estão no docker local
+          env:
+            - name: JAVA_OPTIONS
+              value: " -Duser.timezone=America/Sao_Paulo -Duser.language=pt -Duser.region=BR"
+            -  name: LOGGING_CONFIG
+               value: file:/etc/configuration/logback.xml
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: logback-xml
+              mountPath: /etc/configuration
+              readOnly: true
+      #          livenessProbe:
+      #            httpGet:
+      #              path: /actuator/health
+      #              port: 8080
+      #            initialDelaySeconds: 10
+      #            periodSeconds: 10
+      #          readinessProbe:
+      #            httpGet:
+      #              path: /actuator/health
+      #              port: 8080
+      #            initialDelaySeconds: 10
+      #            periodSeconds: 10
+      volumes:
+        - name: logback-xml
+          configMap:
+            name: apresentacao-backend-logback-config-map
+
